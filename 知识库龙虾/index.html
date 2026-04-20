@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>磐元龙虾 QingClaw</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #0ea5e9;
+            --primary-dark: #0284c7;
+            --primary-light: #38bdf8;
+            --accent-color: #f59e0b;
+            --bg-dark: #0f172a;
+            --bg-darker: #020617;
+            --text-light: #ffffff;
+            --text-gray: #94a3b8;
+            --card-bg: #1e293b;
+            --border-color: rgba(14, 165, 233, 0.2);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #020617 50%, #020617 100%);
+            color: var(--text-light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* 导航栏 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 2rem;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--text-light);
+        }
+
+        .nav-link.active {
+            color: var(--primary-color);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary-color);
+            border-radius: 1px;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .nav-subtitle {
+            color: var(--text-gray);
+            font-size: 0.875rem;
+            margin-left: 1rem;
+        }
+
+        /* 用户菜单 */
+        .user-menu {
+            position: relative;
+        }
+
+        .user-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .user-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .user-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            min-width: 180px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            display: none;
+        }
+
+        .user-menu:hover .user-dropdown {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 0.75rem 1.5rem;
+            color: var(--text-gray);
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(14, 165, 233, 0.1);
+            color: var(--text-light);
+        }
+
+        .dropdown-item.logout {
+            color: #ef4444;
+        }
+
+        .dropdown-item.logout:hover {
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        /* Hero区域 */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-light), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(139, 92, 246, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        /* 安装区域 */
+        .install-section {
+            padding: 4rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .install-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            justify-content: center;
+        }
+
+        .install-tab {
+            padding: 0.75rem 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .install-tab.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .install-tab:hover:not(.active) {
+            border-color: var(--primary-color);
+        }
+
+        .install-code {
+            background: var(--bg-darker);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.875rem;
+            color: #e0e0e0;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .install-code code {
+            color: var(--primary-light);
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.75rem;
+        }
+
+        /* 理由区域 */
+        .reasons-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--text-light);
+        }
+
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .reason-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .reason-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15);
+        }
+
+        .reason-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .reason-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+
+        .reason-card .subtitle {
+            color: var(--accent-color);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .reason-card p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        /* 定价区域 */
+        .pricing-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .pricing-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card:hover {
+            border-color: var(--primary-color);
+        }
+
+        .pricing-card.recommended {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 30px rgba(14, 165, 233, 0.2);
+        }
+
+        .recommended-badge {
+            position: absolute;
+            top: -12px;
+            right: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .pricing-title {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .pricing-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .pricing-original {
+            color: var(--text-gray);
+            text-decoration: line-through;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        /* 定价详情 */
+        .pricing-details {
+            flex: 1;
+            margin: 1rem 0;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.4rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: var(--text-gray);
+            font-size: 0.85rem;
+        }
+
+        .detail-value {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* 数量控制 */
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quantity-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .quantity-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .quantity {
+            min-width: 40px;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* 技能区域 */
+        .skills-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .skill-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: 80px 1fr 200px 100px;
+            gap: 1rem;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            border-color: var(--primary-color);
+        }
+
+        .skill-number {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-gray);
+        }
+
+        .skill-info h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+
+        .skill-info p {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+        }
+
+        .skill-time {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .time-bar {
+            flex: 1;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .time-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+            border-radius: 4px;
+        }
+
+        .time-text {
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            white-space: nowrap;
+        }
+
+        .skill-demo {
+            text-align: right;
+        }
+
+        .demo-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-gray);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .demo-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* 社群区域 */
+        .community-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .community-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .community-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .community-card:hover {
+            border-color: var(--primary-color);
+        }
+
+        .community-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .community-card p {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            line-height: 1.4;
+        }
+
+        .community-qrcode {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .qrcode-image {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 1rem;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        .qrcode-image img {
+            width: 180px;
+            height: 180px;
+        }
+
+        .qrcode-text {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .join-steps {
+            text-align: left;
+        }
+
+        .join-steps h4 {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .join-steps ol {
+            list-style: none;
+            padding: 0;
+        }
+
+        .join-steps li {
+            padding: 0.5rem 0;
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .join-steps li::before {
+            content: counter(step);
+            counter-increment: step;
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 1.2rem;
+            height: 1.2rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+        }
+
+        .join-steps {
+            counter-reset: step;
+        }
+
+        /* CTA区域 */
+        .cta-section {
+            padding: 4rem 2rem;
+            text-align: center;
+            background: linear-gradient(180deg, transparent 0%, rgba(139, 92, 246, 0.1) 100%);
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 0.875rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* 响应式 */
+        @media (max-width: 1024px) {
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .skill-card {
+                grid-template-columns: 60px 1fr;
+                gap: 0.75rem;
+            }
+
+            .skill-time {
+                grid-column: 2;
+                grid-row: 2;
+            }
+
+            .skill-demo {
+                grid-column: 1 / -1;
+                grid-row: 3;
+                text-align: left;
+                margin-top: 0.5rem;
+            }
+
+            .community-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .reasons-grid,
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .nav-actions {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .community-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <div class="logo-icon">🦞</div>
+            磐元龙虾 QINGCLAW
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link active">首页</a>
+            <a href="#pricing" class="nav-link">价格</a>
+            <a href="#skills" class="nav-link">交付技能</a>
+            <a href="video_resources.html" class="nav-link">线上课程</a>
+            <a href="#offline" class="nav-link">线下课程</a>
+            <a href="#community" class="nav-link">龙虾社群</a>
+        </div>
+        <div class="nav-actions">
+            <a href="wechat/qrcode.html" class="btn btn-secondary">微信登录</a>
+        </div>
+    </nav>
+
+    <!-- Hero区域 -->
+    <section class="hero">
+        <h1>律师龙虾，就用磐元龙虾</h1>
+        <p>拥有 7x24 AI 员工</p>
+        <div class="hero-buttons">
+            <a href="video_resources.html" class="btn btn-secondary">查看安装视频</a>
+            <a href="#pricing" class="btn btn-primary">跟着镐赞养龙虾</a>
+        </div>
+    </section>
+
+    <!-- 安装区域 -->
+    <section class="install-section">
+        <div class="install-tabs">
+            <button class="install-tab" onclick="showInstall('macos')">macOS</button>
+            <button class="install-tab active" onclick="showInstall('windows')">Windows</button>
+        </div>
+
+        <div id="macos-install" class="install-content" style="display: none;">
+            <h4 style="color: var(--text-gray); margin-bottom: 1rem; text-align: center;">macOS / 苹果电脑</h4>
+            <div class="install-code">
+                <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                <code>/bin/bash -c "$(curl -sSL https://oss.1024code.com/clacky-ai/openclacky/main/scripts/install.sh)" -- --brand-name=磐元龙虾 --command=qingclaw</code>
+            </div>
+        </div>
+
+        <div id="windows-install" class="install-content">
+            <h4 style="color: var(--text-gray); margin-bottom: 1rem; text-align: center;">Windows / 电脑</h4>
+            <p style="text-align: center; color: var(--text-gray); margin-bottom: 2rem; font-size: 0.9rem;">
+                通常情况下，3-5分钟安装完毕</p>
+
+            <div style="margin-bottom: 1.5rem;">
+                <h5 style="color: var(--text-light); margin-bottom: 0.5rem; font-size: 1rem;">第一步：下载安装包 (.exe)</h5>
+                <div class="install-code">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <code>https://oss.1024code.com/clacky-ai/openclacky/main/installers/windows-installer.exe</code>
+                </div>
+            </div>
+
+            <div>
+                <h5 style="color: var(--text-light); margin-bottom: 0.5rem; font-size: 1rem;">第二步：运行命令</h5>
+                <div class="install-code">
+                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                    <code>powershell -c "% { iwr -useb https://oss.1024code.com/clacky-ai/openclacky/main/scripts/install.ps1 | iex }"</code>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 理由区域 -->
+    <section class="reasons-section">
+        <h2 class="section-title">3 点选择磐元龙虾的理由</h2>
+        <p style="text-align: center; color: var(--text-gray); margin-bottom: 3rem;">专为律师而生，不是通用 AI 套壳</p>
+
+        <div class="reasons-grid">
+            <div class="reason-card">
+                <div class="reason-number">#</div>
+                <h3>节省90%的时间</h3>
+                <p class="subtitle">省下一个助理的成本</p>
+                <p>处理卷宗、起草文书、整理庭审记录——过去需要一个助理干的活，龙虾全包。资深律师用龙虾，节省 90% 时间，省下一个助理的成本。</p>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-number">#</div>
+                <h3>跑赢80%的同行</h3>
+                <p class="subtitle">拉平顶尖律师的专业差距</p>
+                <p>用你自己的 API Key，直连全球顶尖 AI 模型，让刚入行的律师也能用上行业大佬同等级的"法律脑"。跑赢 80% 的同行。</p>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-number">#</div>
+                <h3>提升3×运营能力</h3>
+                <p class="subtitle">拥有一个运营团队</p>
+                <p>公众号、小红书、视频脚本、文章、出书……龙虾帮你一个人撑起律师品牌的全部内容运营，提升 3 倍运营能力，相当于拥有一支 3 人运营团队。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 定价区域 -->
+    <section id="pricing" class="pricing-section">
+        <h2 class="section-title">跟着镐赞养龙虾</h2>
+        <p style="text-align: center; color: var(--text-gray); margin-bottom: 3rem;">不用担心学不会——提供远程服务 & 会议答疑，让你真正养好龙虾</p>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="pricing-title">社群版 + 1 年期使用权</div>
+                <div class="pricing-price">1299元</div>
+                <div class="pricing-original">原价 1999 元</div>
+
+                <div class="pricing-details">
+                    <div class="detail-item">
+                        <span class="detail-label">适合人群</span>
+                        <span class="detail-value">自带技术感，能自主探索工具的独立律师</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">龙虾数量</span>
+                        <span class="detail-value">特供龙虾 1 只</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">参加人数</span>
+                        <span class="detail-value">1 人</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">参加地区</span>
+                        <span class="detail-value">微信社群</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">龙虾期限</span>
+                        <span class="detail-value">1 年</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">线上课程</span>
+                        <span class="detail-value">基础课程</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">社群答疑</span>
+                        <span class="detail-value">✓</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">会议答疑</span>
+                        <span class="detail-value">> 12 次/年</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">远程服务</span>
+                        <span class="detail-value">✓</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">线下交付</span>
+                        <span class="detail-value">-</span>
+                    </div>
+                </div>
+
+                <a href="#" class="btn btn-primary" style="width: 100%; text-align: center;">立即购买</a>
+            </div>
+
+            <div class="pricing-card">
+                <div class="pricing-title">线上课程 + 1 年期使用权</div>
+                <div class="pricing-price">1999元</div>
+
+                <div class="pricing-details">
+                    <div class="detail-item">
+                        <span class="detail-label">适合人群</span>
+                        <span class="detail-value">想系统掌握龙虾，跟着镐赞学满一年</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">龙虾数量</span>
+                        <span class="detail-value">特供龙虾 1 只</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">参加人数</span>
+                        <span class="detail-value">1 人</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">参加地区</span>
+                        <span class="detail-value">线上课程</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">龙虾期限</span>
+                        <span class="detail-value">1 年</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">线上课程</span>
+                        <span class="detail-value">进阶课程</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">社群答疑</span>
+                        <span class="detail-value">✓</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">会议答疑</span>
+                        <span class="detail-value">> 12 次/年</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">远程服务</span>
+                        <span class="detail-value">✓</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">线下交付</span>
+                        <span class="detail-value">-</span>
+                    </div>
+                </div>
+
+                <a href="#" class="btn btn-primary" style="width: 100%; text-align: center;">立即购买</a>
+            </div>
+
+            <div class="pricing-card recommended">
+                <span class="recommended-badge">推荐</span>
+                <div class="pricing-title">线下课程 + 1 年期使用权</div>
+                <div class="pricing-price">2,999元/人</div>
+
+                <div class="pricing-details">
+                    <div class="detail-item">
+                        <span class="detail-label">适合人群</span>
+                        <span class="detail-value">想快速上手，面对面解决所有疑问 ⭐</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">龙虾数量</span>
+                        <span class="detail-value">特供龙虾 1 只</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">参加人数</span>
+                        <div class="quantity-control">
+                            <button class="quantity-btn minus" onclick="updateQuantity(this, -1, 1, 100)">-</button>
+                            <span class="quantity">1</span>
+                            <button class="quantity-btn plus" onclick="updateQuantity(this, 1, 1, 100)">+</button>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">参加地区</span>
+                        <span class="detail-value">由内训负责人确定</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">龙虾期限</span>
+                        <span class="detail-value">1 年</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">线上课程</span>
+                        <span class="detail-value">进阶课程</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">社群答疑</span>
+                        <span class="detail-value">✓</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">会议答疑</span>
+                        <span class="detail-value">> 12 次/年</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">远程服务</span>
+                        <span class="detail-value">✓</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">线下交付</span>
+                        <span class="detail-value">✓</span>
+                    </div>
+                </div>
+
+                <a href="#" class="btn btn-primary" style="width: 100%; text-align: center;">立即购买</a>
+            </div>
+
+            <div class="pricing-card">
+                <div class="pricing-title">团队线下内训</div>
+                <div class="pricing-original">原价 2999 元/人</div>
+                <div class="pricing-price">1,999元/人</div>
+                <p style="color: var(--text-gray); font-size: 0.85rem; margin-bottom: 1rem;">共计 29,985 元 · 15人起</p>
+
+                <div class="pricing-details">
+                    <div class="detail-item">
+                        <span class="detail-label">适合人群</span>
+                        <span class="detail-value">整个团队一起提效，适合律所或区域律师群体</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">龙虾数量</span>
+                        <span class="detail-value">青狮龙虾 15 只</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">参加人数</span>
+                        <div class="quantity-control">
+                            <button class="quantity-btn minus" onclick="updateQuantity(this, -1, 15, 100)">-</button>
+                            <span class="quantity">15</span>
+                            <button class="quantity-btn plus" onclick="updateQuantity(this, 1, 15, 100)">+</button>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">参加地区</span>
+                        <span class="detail-value">由内训负责人确定</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">龙虾期限</span>
+                        <span class="detail-value">1 年</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">线上课程</span>
+                        <span class="detail-value">进阶课程</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">社群答疑</span>
+                        <span class="detail-value">✓</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">会议答疑</span>
+                        <span class="detail-value">> 12 次/年</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">远程服务</span>
+                        <span class="detail-value">✓</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">线下交付</span>
+                        <span class="detail-value">✓</span>
+                    </div>
+                </div>
+
+                <a href="#" class="btn btn-primary" style="width: 100%; text-align: center;">立即购买</a>
+            </div>
+        </div>
+
+        <p style="text-align: center; color: var(--text-gray); margin-top: 2rem; font-size: 0.9rem;">
+            支持发票 · 支持公户付款
+        </p>
+    </section>
+
+    <!-- 技能区域 -->
+    <section class="skills-section">
+        <h2 class="section-title">交付 16 项龙虾技能<br><span style="font-size: 1rem; color: var(--text-gray);">持续增加中</span>
+        </h2>
+        <p style="text-align: center; color: var(--text-gray); margin-bottom: 3rem;">每一个 Skill
+            均由镐赞参与设计，覆盖真实执业场景——交付即可上手，开箱即用</p>
+
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-number">01</div>
+                <div class="skill-info">
+                    <h4>AI 法律咨询</h4>
+                    <p>当事人说完案情，秒出法律意见，接案前先过一遍</p>
+                </div>
+                <div class="skill-time">
+                    <div class="time-bar">
+                        <div class="time-fill" style="width: 95%;"></div>
+                    </div>
+                    <span class="time-text">节约 95% 的时间</span>
+                </div>
+                <div class="skill-demo">
+                    <button class="demo-btn">演示</button>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-number">02</div>
+                <div class="skill-info">
+                    <h4>AI 合同审核 Word 版</h4>
+                    <p>上传合同，一键输出带批注修订的 Word，审完直接发对方</p>
+                </div>
+                <div class="skill-time">
+                    <div class="time-bar">
+                        <div class="time-fill" style="width: 95%;"></div>
+                    </div>
+                    <span class="time-text">节约 95% 的时间</span>
+                </div>
+                <div class="skill-demo">
+                    <button class="demo-btn">演示</button>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-number">03</div>
+                <div class="skill-info">
+                    <h4>AI 文书撰写 Word 版</h4>
+                    <p>说清案情，自动起草起诉状（要素式）、答辩状、代理意见，开口即成稿</p>
+                </div>
+                <div class="skill-time">
+                    <div class="time-bar">
+                        <div class="time-fill" style="width: 95%;"></div>
+                    </div>
+                    <span class="time-text">节约 95% 的时间</span>
+                </div>
+                <div class="skill-demo">
+                    <button class="demo-btn">演示</button>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-number">04</div>
+                <div class="skill-info">
+                    <h4>AI 案件阅卷分析</h4>
+                    <p>对 PDF/Word 阅卷笔录，自动提关键事实、时间线、争议焦点，撰写质证意见</p>
+                </div>
+                <div class="skill-time">
+                    <div class="time-bar">
+                        <div class="time-fill" style="width: 90%;"></div>
+                    </div>
+                    <span class="time-text">节约 90% 的时间</span>
+                </div>
+                <div class="skill-demo">
+                    <button class="demo-btn">演示</button>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-number">05</div>
+                <div class="skill-info">
+                    <h4>AI 法律检索 + 报告</h4>
+                    <p>进入专业数据库，自动检索法条+案例，输出完整检索报告</p>
+                </div>
+                <div class="skill-time">
+                    <div class="time-bar">
+                        <div class="time-fill" style="width: 90%;"></div>
+                    </div>
+                    <span class="time-text">节约 90% 的时间</span>
+                </div>
+                <div class="skill-demo">
+                    <button class="demo-btn">演示</button>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-number">06</div>
+                <div class="skill-info">
+                    <h4>AI 诉讼可视化</h4>
+                    <p>案件关系图、证据链、时间轴一键生成，庭前汇报直接用</p>
+                </div>
+                <div class="skill-time">
+                    <div class="time-bar">
+                        <div class="time-fill" style="width: 95%;"></div>
+                    </div>
+                    <span class="time-text">节约 95% 的时间</span>
+                </div>
+                <div class="skill-demo">
+                    <button class="demo-btn">演示</button>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-number">07</div>
+                <div class="skill-info">
+                    <h4>AI 模拟庭审</h4>
+                    <p>让 AI 扮演法官和对方律师，提前演练质证和辩论</p>
+                </div>
+                <div class="skill-time">
+                    <div class="time-bar">
+                        <div class="time-fill" style="width: 95%;"></div>
+                    </div>
+                    <span class="time-text">节约 95% 的时间</span>
+                </div>
+                <div class="skill-demo">
+                    <button class="demo-btn">演示</button>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-number">08</div>
+                <div class="skill-info">
+                    <h4>AI 生成 PPT</h4>
+                    <p>案情简报、法律培训、所务汇报，说个主题就出一份 PPT</p>
+                </div>
+                <div class="skill-time">
+                    <div class="time-bar">
+                        <div class="time-fill" style="width: 95%;"></div>
+                    </div>
+                    <span class="time-text">节约 95% 的时间</span>
+                </div>
+                <div class="skill-demo">
+                    <button class="demo-btn">演示</button>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-number">09</div>
+                <div class="skill-info">
+                    <h4>AI 公众号写作</h4>
+                    <p>输入案例或话题，自动生成律师品牌公众号文章，发完就走</p>
+                </div>
+                <div class="skill-time">
+                    <div class="time-bar">
+                        <div class="time-fill" style="width: 95%;"></div>
+                    </div>
+                    <span class="time-text">节约 95% 的时间</span>
+                </div>
+                <div class="skill-demo">
+                    <button class="demo-btn">演示</button>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-number">10</div>
+                <div class="skill-info">
+                    <h4>AI 小红书图文</h4>
+                    <p>法律知识变成小红书爆款图文，拓客获客不求运营</p>
+                </div>
+                <div class="skill-time">
+                    <div class="time-bar">
+                        <div class="time-fill" style="width: 95%;"></div>
+                    </div>
+                    <span class="time-text">节约 95% 的时间</span>
+                </div>
+                <div class="skill-demo">
+                    <button class="demo-btn">演示</button>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-number">11</div>
+                <div class="skill-info">
+                    <h4>AI 视频添加字幕</h4>
+                    <p>庭审录像、培训视频，自动识别语音、烧录字幕，一条命令搞定</p>
+                </div>
+                <div class="skill-time">
+                    <div class="time-bar">
+                        <div class="time-fill" style="width: 95%;"></div>
+                    </div>
+                    <span class="time-text">节约 95% 的时间</span>
+                </div>
+                <div class="skill-demo">
+                    <button class="demo-btn">演示</button>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-number">12</div>
+                <div class="skill-info">
+                    <h4>AI 日志/日记</h4>
+                    <p>每天工作内容口述一遍，自动生成工作日志和复盘摘要</p>
+                </div>
+                <div class="skill-time">
+                    <div class="time-bar">
+                        <div class="time-fill" style="width: 100%;"></div>
+                    </div>
+                    <span class="time-text">节约 100% 的时间</span>
+                </div>
+                <div class="skill-demo">
+                    <button class="demo-btn">演示</button>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-number">13</div>
+                <div class="skill-info">
+                    <h4>AI 个人 / 团队网站</h4>
+                    <p>描述你或你的团队，10 分钟生成一个对外展示的专业网站</p>
+                </div>
+                <div class="skill-time">
+                    <div class="time-bar">
+                        <div class="time-fill" style="width: 95%;"></div>
+                    </div>
+                    <span class="time-text">节约 95% 的时间</span>
+                </div>
+                <div class="skill-demo">
+                    <button class="demo-btn">演示</button>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-number">14</div>
+                <div class="skill-info">
+                    <h4>AI 生图</h4>
+                    <p>封面、配图、海报，输入一句话，出图即用</p>
+                </div>
+                <div class="skill-time">
+                    <div class="time-bar">
+                        <div class="time-fill" style="width: 95%;"></div>
+                    </div>
+                    <span class="time-text">节约 95% 的时间</span>
+                </div>
+                <div class="skill-demo">
+                    <button class="demo-btn">演示</button>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-number">15</div>
+                <div class="skill-info">
+                    <h4>AI Skill 生成</h4>
+                    <p>发现重复性工作，自己设计一个专属 Skill，龙虾越养越强</p>
+                </div>
+                <div class="skill-time">
+                    <div class="time-bar">
+                        <div class="time-fill" style="width: 95%;"></div>
+                    </div>
+                    <span class="time-text">节约 95% 的时间</span>
+                </div>
+                <div class="skill-demo">
+                    <button class="demo-btn">演示</button>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-number">16</div>
+                <div class="skill-info">
+                    <h4>AI 搭建本地知识库</h4>
+                    <p>案件、法规、文书全部沉淀，随时检索，越用越懂你</p>
+                </div>
+                <div class="skill-time">
+                    <div class="time-bar">
+                        <div class="time-fill" style="width: 95%;"></div>
+                    </div>
+                    <span class="time-text">节约 95% 的时间</span>
+                </div>
+                <div class="skill-demo">
+                    <button class="demo-btn">演示</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 社群区域 -->
+    <section class="community-section">
+        <h2 class="section-title">龙虾社群</h2>
+        <p style="text-align: center; color: var(--text-gray); margin-bottom: 3rem;">按大区组建，为了让你们真的能见面</p>
+
+        <div class="community-container">
+            <div class="community-grid">
+                <div class="community-card">
+                    <h4>华北群</h4>
+                    <p>北京 · 天津 · 石家庄 · 太原 · 呼和浩特 · 济南</p>
+                </div>
+                <div class="community-card">
+                    <h4>东北群</h4>
+                    <p>沈阳 · 长春 · 哈尔滨</p>
+                </div>
+                <div class="community-card">
+                    <h4>长三角</h4>
+                    <p>上海 · 南京 · 杭州 · 合肥</p>
+                </div>
+                <div class="community-card">
+                    <h4>华中群</h4>
+                    <p>郑州 · 武汉 · 长沙 · 南昌</p>
+                </div>
+                <div class="community-card">
+                    <h4>华南群</h4>
+                    <p>广州 · 深圳 · 福州 · 南宁 · 海口</p>
+                </div>
+                <div class="community-card">
+                    <h4>西南群</h4>
+                    <p>重庆 · 成都 · 贵阳 · 昆明 · 拉萨</p>
+                </div>
+                <div class="community-card">
+                    <h4>西北群</h4>
+                    <p>西安 · 兰州 · 西宁 · 银川 · 乌鲁木齐</p>
+                </div>
+            </div>
+
+            <div class="community-qrcode">
+                <div class="qrcode-image">
+                    <!-- 这里放置二维码图片 -->
+                    <div style="font-size: 4rem;">📱</div>
+                </div>
+                <div class="qrcode-text">
+                    扫码名片，俟入大群
+                </div>
+                <div class="join-steps">
+                    <h4>入群流程</h4>
+                    <ol>
+                        <li>付费后，扫码添加创始人微信</li>
+                        <li>告知所在省会城市</li>
+                        <li>被拉入对应大区群</li>
+                        <li>线上社群答疑+线下碰头</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <p style="text-align: center; color: var(--text-gray); margin-top: 2rem; font-size: 0.9rem;">
+            7 个群，按大区分，就近入群。<br>
+            每个区，主要城市之间高铁两小时都能到。<br>
+            法律这行靠信任——坐下来面对面聊，比什么都强。
+        </p>
+    </section>
+
+    <!-- CTA区域 -->
+    <section class="cta-section">
+        <h2>立即开启您的法律 AI 之旅</h2>
+        <a href="#pricing" class="btn btn-primary">跟着镐赞养龙虾</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>磐元龙虾 QingClaw · 律师 AI 助手</p>
+    </footer>
+
+    <script>
+        function showInstall(type) {
+            document.querySelectorAll('.install-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.install-content').forEach(content => content.style.display = 'none');
+
+            if (type === 'macos') {
+                document.querySelector('.install-tab:first-child').classList.add('active');
+                document.getElementById('macos-install').style.display = 'block';
+            } else {
+                document.querySelector('.install-tab:last-child').classList.add('active');
+                document.getElementById('windows-install').style.display = 'block';
+            }
+        }
+
+        function copyCode(btn) {
+            const code = btn.parentElement.querySelector('code').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                btn.textContent = '已复制!';
+                setTimeout(() => btn.textContent = '复制', 2000);
+            });
+        }
+
+        // 数量控制
+        function updateQuantity(button, change, min, max) {
+            const quantityElement = button.parentElement.querySelector('.quantity');
+            let quantity = parseInt(quantityElement.textContent);
+            quantity = Math.max(min, Math.min(max, quantity + change));
+            quantityElement.textContent = quantity;
+        }
+
+        // 处理支付按钮点击
+        document.addEventListener('DOMContentLoaded', function () {
+            const buyButtons = document.querySelectorAll('.btn-primary');
+
+            buyButtons.forEach(button => {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    // 确定产品类型
+                    let product;
+                    const card = this.closest('.pricing-card');
+                    const title = card.querySelector('.pricing-title').textContent;
+
+                    if (title.includes('社群版')) {
+                        product = 'community';
+                    } else if (title.includes('线上课程')) {
+                        product = 'online';
+                    } else if (title.includes('线下课程')) {
+                        product = 'offline';
+                    } else if (title.includes('团队线下内训')) {
+                        product = 'team';
+                    }
+
+                    // 获取数量
+                    let quantity = 1;
+                    const quantityElement = card.querySelector('.quantity');
+                    if (quantityElement) {
+                        quantity = parseInt(quantityElement.textContent);
+                    }
+
+                    // 调用后端API创建支付会话
+                    fetch('/create-checkout', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            product: product,
+                            quantity: quantity
+                        })
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.checkout_url) {
+                                window.location.href = data.checkout_url;
+                            } else {
+                                alert('创建支付会话失败: ' + data.error);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('创建支付会话失败，请稍后重试');
+                        });
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
