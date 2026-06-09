@@ -76,7 +76,7 @@ export default function Home() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">安装 磐元龙虾</h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              以下两种方式<strong className="text-foreground">任选其一</strong>即可。推荐方式一，全自动安装。
+              先下载安装器运行，再执行命令，<strong className="text-foreground">两步完成</strong>
             </p>
           </div>
 
@@ -103,10 +103,10 @@ export default function Home() {
             <Card className="overflow-hidden border-2 mb-6">
               <CardContent className="p-0">
                 <div className="flex items-center gap-3 px-4 py-3 bg-primary/5 border-b">
-                  <div className="w-7 h-7 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">A</div>
-                  <span className="font-semibold">方式一：桌面安装器（推荐）</span>
+                  <div className="w-7 h-7 bg-primary rounded-full flex items-center justify-center text-primary-foreground text-sm font-bold flex-shrink-0">1</div>
+                  <span className="font-semibold">第 1 步：下载安装器</span>
                   <span className="text-xs text-muted-foreground">
-                    一键自动安装，无需手动操作
+                    {activeTab === "windows" ? "（.exe 双击运行）" : "（.dmg 双击安装）"}
                   </span>
                 </div>
                 <div className="p-5 flex flex-col sm:flex-row items-center gap-4">
@@ -123,19 +123,13 @@ export default function Home() {
               </CardContent>
             </Card>
 
-            <div className="flex items-center gap-3 my-6">
-              <div className="flex-1 border-t border-border"></div>
-              <span className="text-sm text-muted-foreground font-medium">或者</span>
-              <div className="flex-1 border-t border-border"></div>
-            </div>
-
-            {/* Method B: Terminal Command */}
+            {/* Step 2: Terminal Command */}
             <Card className="overflow-hidden border-2">
               <CardContent className="p-0">
                 <div className="flex items-center gap-3 px-4 py-3 bg-primary/5 border-b">
-                  <div className="w-7 h-7 bg-primary rounded-full flex items-center justify-center text-primary-foreground text-sm font-bold flex-shrink-0">B</div>
-                  <span className="font-semibold">方式二：命令行安装</span>
-                  <span className="text-xs text-muted-foreground">（适合开发者，手动运行命令）</span>
+                  <div className="w-7 h-7 bg-primary rounded-full flex items-center justify-center text-primary-foreground text-sm font-bold flex-shrink-0">2</div>
+                  <span className="font-semibold">第 2 步：运行安装命令</span>
+                  <span className="text-xs text-muted-foreground">（安装磐元龙虾品牌 + 47 项法律技能）</span>
                 </div>
                 <div className="bg-zinc-950 text-zinc-50">
                   <div className="flex items-center justify-between px-4 py-2 bg-zinc-900 border-b border-zinc-800">
@@ -164,8 +158,8 @@ export default function Home() {
             {/* What gets installed */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6">
               {[
-                { step: "1", text: "任选一种方式安装" },
-                { step: "2", text: "等待自动完成" },
+                { step: "1", text: "下载并运行安装器" },
+                { step: "2", text: "运行安装命令" },
                 { step: "3", text: "终端输入 panyuanclaw" },
                 { step: "4", text: "配好 API Key 即用" },
               ].map((item, i) => (

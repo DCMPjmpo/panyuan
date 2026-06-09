@@ -49,15 +49,18 @@ wsl --install -d Ubuntu
 
 等待完成后**重启电脑**。重启后开始菜单会出现 "Ubuntu"，打开它，设置用户名和密码。
 
-### 安装方式二选一
+### 安装（两步完成）
 
-#### 方式一：桌面安装器（推荐 ⭐）
+#### 第 1 步：下载安装器
 
-1. 下载安装器：[installer.exe](https://github.com/DCMPjmpo/panyuan/raw/main/public/installer.exe)（Windows）/ [installer.dmg](https://github.com/DCMPjmpo/panyuan/raw/main/public/installer.dmg)（macOS）
-2. 双击运行，等待自动完成
-3. 安装完成后，打开终端输入 `panyuanclaw` 即可使用
+- **Windows**：下载 [installer.exe](https://github.com/DCMPjmpo/panyuan/raw/main/public/installer.exe)，双击运行
+- **macOS**：下载 [installer.dmg](https://github.com/DCMPjmpo/panyuan/raw/main/public/installer.dmg)，双击安装
 
-#### 方式二：命令行安装
+安装器会自动配置 Ruby、WSL 等运行环境。等待它跑完。
+
+#### 第 2 步：运行安装命令
+
+安装器跑完后，打开终端运行命令，安装磐元龙虾品牌和 47 项法律技能：
 
 **Windows**（PowerShell 管理员运行）：
 
