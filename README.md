@@ -1,218 +1,254 @@
-# Simple Saas Starter Kit
+# 磐元龙虾 Panyuan Claw 🦞
 
-全网最极简的SAAS网站模板！
-帮助开发者快速搭建支持全球用户登录和支付的网站系统。
+**您的 AI 法律助手** — 搭载 47 项专业法律技能，基于 OpenClacky 开源框架，一键安装即用。
 
-基于raphael-starterkit-v1做了简化重构，面向小白的启动套件，进一步降低学习成本。
-功能仅包括登录（用户管理）、支付，没了。
+官网：[https://panyuan.claw](https://panyuan.claw)（替换为你的实际域名）
 
-别对中国大陆开发者友好。
+---
 
+## 📖 目录
 
-## 🌟 简介
+- [用户指南：安装和使用磐元龙虾](#用户指南安装和使用磐元龙虾)
+- [开发者指南：运行和修改网页](#开发者指南运行和修改网页)
+- [项目结构](#项目结构)
+- [技术栈](#技术栈)
 
-基于 Next.js、Supabase 和 Creem.io 生产就绪的启动套件
-快速构建具有身份验证、订阅和积分系统的 SaaS 应用程序。
+---
 
-中国版参见，支持微信支付https://github.com/fishfl/simple_saas_cn
+# 用户指南：安装和使用磐元龙虾
 
-## 核心特色功能
+## 🦞 什么是磐元龙虾？
 
-- 🔐 **全面的身份验证系统**
-  - 基于Supabase
-  - 电子邮件登录支持
-  - Google 登录支持
+磐元龙虾是基于 OpenClacky 平台构建的 AI 法律助手，在 OpenClacky 官方平台认证发布。它搭载 **47 项法律技能**，覆盖七大领域，安装在本地电脑上，配用你自己的 API Key 即可使用。
 
-- 💳 **完整的支付与订阅系统**
-  - 与Creem.io集成，支持全球信用卡收款，支持支付宝
+### 47 项法律技能
 
-- 📱 **响应式设计**
+| 分类 | 技能数 | 包含 |
+|------|--------|------|
+| 合同审查 | 10 | 买卖、租赁、劳动、合作、借款、保密、竞业限制、服务、技术、委托合同审查 |
+| 法律文书 | 7 | 起诉状、答辩状、法律意见书、律师函、仲裁申请、强制执行申请、证据清单整理 |
+| 企业法务 | 7 | 公司章程制定、股权架构设计、股东协议、尽职调查、知识产权保护、商标注册指导、劳动用工合规 |
+| 诉讼辅助 | 5 | 案例检索分析、诉讼策略建议、证据链分析、庭审准备、上诉论证 |
+| 法律法规 | 6 | 民法典、刑法、公司法、合同法、劳动法、知识产权法查询解读 |
+| 个人法律 | 6 | 婚姻家事、遗产继承、房产交易、消费维权、交通事故、医疗纠纷 |
+| 通用能力 | 6 | 法律风险评估、法律术语解释、合同模板库、法律计算器、诉讼时效提醒、法律政策解读 |
 
+---
 
+## 💻 安装磐元龙虾
 
-## 快速开始
+### 前置条件
 
-![alt text](topology.png)
+**Windows 用户需要先安装 WSL**（Windows Subsystem for Linux）：
 
-### 前提条件
+以管理员身份打开 PowerShell，运行：
 
-- Node.js 18+ 和 npm
-- Supabase 账户
-- Creem.io 账户
+```powershell
+wsl --install -d Ubuntu
+```
 
-### 步骤 1: 克隆仓库
+等待完成后**重启电脑**。重启后开始菜单会出现 "Ubuntu"，打开它，设置用户名和密码。
+
+### 安装方式二选一
+
+#### 方式一：桌面安装器（推荐 ⭐）
+
+1. 下载安装器：[installer.exe](https://github.com/DCMPjmpo/panyuan/raw/main/public/installer.exe)（Windows）/ [installer.dmg](https://github.com/DCMPjmpo/panyuan/raw/main/public/installer.dmg)（macOS）
+2. 双击运行，等待自动完成
+3. 安装完成后，打开终端输入 `panyuanclaw` 即可使用
+
+#### 方式二：命令行安装
+
+**Windows**（PowerShell 管理员运行）：
+
+```powershell
+powershell -c "& ([scriptblock]::Create((irm 'https://oss.1024code.com/clacky-ai/openclacky/main/scripts/install.ps1'))) -BrandName '磐元龙虾' -CommandName 'panyuanclaw'"
+```
+
+**macOS**（终端运行）：
 
 ```bash
-git clone https://github.com/fishfl/simple_saas.git
-cd simple_saas
+/bin/bash -c "$(curl -sSL https://oss.1024code.com/clacky-ai/openclacky/main/scripts/install.sh)" -- --brand-name=磐元龙虾 --command=panyuanclaw
 ```
 
-@@@
+> ⚠️ 注意：如果 Windows 没有 WSL，可以先装 Ruby（https://rubyinstaller.org/），然后运行 `gem install openclacky`，再运行上面的 PowerShell 命令。
 
-强烈建议，先fork代码到自己的仓库里，再执行clone。毕竟你后续还要完善你自己的业务代码。
-直接clone这个代码库仅用作演示。
+---
 
-@@@
+## 🚀 启动和使用
 
+### 启动磐元龙虾
 
-### 步骤 2: 安装依赖
+打开终端（Windows 用 WSL Ubuntu 终端），输入：
 
 ```bash
-npm i
+panyuanclaw
 ```
 
-### 步骤 3: 开启环境变量
-   ```bash
-   cp .env.example .env.local
-   ```
+进入交互式命令行模式。
 
-
-### 步骤 4: 设置 Supabase
-
-1. 在 [Supabase](https://app.supabase.com) 上创建一个新项目
-   - 点击"新建项目"
-   - 填写基本信息（项目名称、密码等）
-
-2. Settings > Data API
-   - 复制API URL, 粘贴到.env文件中NEXT_PUBLIC_SUPABASE_URL
-
-   同样，Settings > API Keys 
-   Legacy anon, service_role API keys
-   - 复制anon public 粘贴到NEXT_PUBLIC_SUPABASE_ANON_KEY
-   - 复制service_role 粘贴到SUPABASE_SERVICE_ROLE_KEY
-
-3. 配置登录方式
-   - 选择【Authentication】>【Sign In / Providers】
-   - 开启email登录、开启谷歌登录
-
-4. *设置Google登录
-   - 进入[Google 开发者控制台](https://console.cloud.google.com)，创建新项目
-   - 配置项目权限
-   - 前往【API与服务】>【凭据】
-   - 创建OAuth客户端ID（可能要先创建品牌塑造）
-   - 添加授权来源URL和重定向URI
-   - 重定向URI格式: `https://<项目ID>.supabase.co/auth/v1/callback`
-     （注意是id不是name，在Supabase项目setting页面复制）
-   - 复制OAuth客户端ID和密钥
-
-   回到Supabase配置Google登录
-   - 选择【Authentication】>【Sign In / Providers】
-   - 点击Google登录
-   - 填写从Google开发者控制台获取的客户端ID和密钥
-
-5. 创建数据库表结构
-   - 打开supabase/migrations/20250101000000_init_schema.sql
-   - 复制SQL代码到Supabase SQL编辑器
-   - 执行SQL创建表结构
-
-
-### 步骤 5: 设置 Creem.io
-
-1. 登录到 [Creem.io 仪表板](https://www.creem.io/)
-2. 初始设置
-   - 创建一个商店，填写各种基本信息
-   - 打开测试mode
-   - Developers > API & Webhooks
-   - 复制API Key并粘贴到.env文件中CREEM_API_KEY
-
-3. 创建Webhooks
-   - Developers > API & Webhooks
-   - 创建新的Webhook
-   - 填写URL: `https://你的域名/api/webhooks/creem`
-   - 复制Webhook密钥并粘贴到.env文件中CREEM_WEBHOOK_SECRET
-   这时，你可能还没有域名，没关系，随便填一个，我们稍后回来再改
-
-
-4. 测试API地址和生产地址
-   我们前期都在测试模式，所以这个地址不用改
-   ```
-   CREEM_API_URL=https://test-api.creem.io/v1
-   ```
-
-5. 创建收费Product
-   
-   - 在在Products里创建两个产品，一个订阅项目和一个积分项目
-   - 复制产品ID并配置到代码config/subscriptions.ts中，订阅项目先用同一个id，积分项目先用另一个id
-
-
-### 步骤 6: 运行开发服务器
+### 启动 Web 界面
 
 ```bash
-npm run dev
+panyuanclaw server
 ```
 
-访问 [http://localhost:3000](http://localhost:3000) 查看你的应用程序。
+浏览器打开 **http://localhost:7070**，即可使用带界面的磐元龙虾。
 
+### 首次配置
 
+1. 启动后输入 `/config`
+2. 设置你的 API Key（Claude / GPT / DeepSeek / Kimi 等任选其一）
+3. 设置 API Base URL（如使用官方接口则无需修改）
+4. 输入 `/` 浏览全部 47 项法律技能
+
+### 使用技能
+
+- 输入 `/` 模糊搜索技能
+- 直接描述你的法律问题，AI 会自动匹配合适的技能
+- 示例：
+  - "帮我审查这份买卖合同"
+  - "起草一份律师函"
+  - "查询民法典关于违约责任的规定"
+
+### API Key 获取
+
+| 平台 | 地址 | 说明 |
+|------|------|------|
+| Anthropic (Claude) | https://console.anthropic.com/ | 推荐，法律理解能力强 |
+| OpenAI (GPT) | https://platform.openai.com/ | 通用能力强 |
+| DeepSeek | https://platform.deepseek.com/ | 性价比高 |
+| Moonshot (Kimi) | https://platform.moonshot.cn/ | 中文友好 |
+
+---
+
+## 💰 定价
+
+磐元龙虾安装**免费**。使用 AI 功能产生的 API 费用由模型提供商按用量收取，每次咨询通常仅几美分。
+
+社群版 ¥999/年（含 47 项技能 1 年期使用权 + 专属社群 + 磐元法讯周刊），微信咨询：**15676112976**。
+
+---
+
+## ❓ 常见问题
+
+**Q: 磐元龙虾和 ChatGPT 有什么区别？**
+A: 磐元龙虾是专为法律场景设计的 AI 助手，内置 47 项法律专业技能，不是通用 AI 套壳。它会根据法律场景自动调用对应的技能，输出更专业、格式更规范。
+
+**Q: 安装需要多久？**
+A: 网络正常情况下 5-10 分钟。
+
+**Q: 必须用 WSL 吗？**
+A: Windows 推荐用 WSL。也可以直接装 Ruby（rubyinstaller.org），然后用 `gem install openclacky` 安装。
+
+**Q: 法律建议可靠吗？**
+A: AI 内容仅供参考学习，重大法律事务请咨询执业律师。
+
+**Q: 支持哪些平台？**
+A: Windows 10/11、macOS（Intel 和 Apple Silicon）、Linux。
+
+---
+
+# 开发者指南：运行和修改网页
+
+## 🛠 环境要求
+
+- **Node.js** 18+ 
+- **npm**（随 Node.js 安装）
+
+## 🚀 快速启动
+
+### 1. 克隆仓库
+
+```bash
+git clone https://github.com/DCMPjmpo/panyuan.git
+cd panyuan
+```
+
+### 2. 安装依赖
+
+```bash
+npm install
+```
+
+### 3. 启动开发服务器
+
+```bash
+npx next dev --port 3000
+```
+
+看到 `✓ Ready` 后，浏览器打开 **http://localhost:3000** 查看网页。
+
+### 4. 修改网页内容
+
+| 想改的内容 | 修改文件 |
+|-----------|---------|
+| 首页 Hero 标题和描述 | `app/page.tsx` 开头部分 |
+| 安装命令 | `app/page.tsx` 搜索 `WIN_CMD` 和 `NIX_CMD` |
+| 定价金额 | `app/page.tsx` 搜索 `¥999` |
+| 微信号 | `app/page.tsx` 搜索 `15676112976` |
+| 微信二维码 | 替换 `public/qrcode.png` |
+| Logo | `components/logo.tsx` |
+| 导航栏链接 | `components/header.tsx` |
+| 页脚内容 | `components/footer.tsx` |
+| 网站标题/SEO | `app/layout.tsx` 的 metadata |
+| 法律技能内容 | `.clacky/skills/` 目录下各 `SKILL.md` |
+
+### 5. 构建生产版本
+
+```bash
+npm run build
+npm start
+```
+
+生产版本运行在 http://localhost:3000。
+
+## 📁 项目结构
 
 ```
-恭喜，整个开发环境已经跑起来了！！！
-
-接下来我们开始部署到线上！
+├── app/                         # Next.js App Router
+│   ├── page.tsx                 # 🔥 首页（磐元龙虾产品站）
+│   ├── layout.tsx               # 根布局 + SEO 元数据
+│   ├── globals.css              # 全局样式
+│   ├── (auth-pages)/            # 登录/注册页
+│   ├── api/                     # API 路由
+│   ├── dashboard/               # 用户仪表盘
+│   └── about/privacy/terms/     # 其他页面
+├── components/
+│   ├── ui/                      # shadcn/ui 组件库
+│   ├── header.tsx               # 导航栏
+│   ├── footer.tsx               # 页脚
+│   ├── logo.tsx                 # Logo
+│   └── pricing-section.tsx      # 定价组件
+├── .clacky/skills/              # 🔥 47 项法律技能定义
+│   ├── sales-contract-review/   # 买卖合同审查
+│   ├── complaint-generation/    # 起诉状生成
+│   └── ...（共 47 个）
+├── public/                      # 静态资源
+│   ├── installer.exe / .dmg     # 安装器下载文件
+│   ├── qrcode.png               # 微信二维码
+│   └── skills.tar.gz            # 技能包
+├── config/                      # 配置文件
+├── types/                       # TypeScript 类型
+├── utils/                       # 工具函数
+└── hooks/                       # 自定义 Hooks
 ```
 
+## 🛠 技术栈
 
-现在，可以去买个自己域名了，或者用Vercel生成的子域名，下面不再提示，都称‘你的域名’
-（Vercel生成的子域名访问性不佳，国内有时需要梯子才能访问到）
+| 类别 | 技术 |
+|------|------|
+| 框架 | Next.js 16 + React 19 |
+| 语言 | TypeScript |
+| 样式 | Tailwind CSS + shadcn/ui |
+| 动画 | Framer Motion |
+| AI 平台 | OpenClacky |
+| 部署 | Vercel / 任意支持 Next.js 的平台 |
 
+---
 
+## 📞 联系
 
-### 步骤 7: Vercel部署
-
-1. 将代码推送到GitHub
-2. 将仓库导入到[Vercel](https://vercel.com)
-3. 添加导入所有环境变量
-4. 完成部署
-5. 修改环境变量BASE_URL、CREEM_SUCCESS_URL，指向你的域名
-
-### 步骤 8: 更新Webhook回调地址
-
-1. 进入Creem.io，进入开发者模式
-2. 更新Webhooks配置
-   - Developers > API & Webhooks
-   - 将URL更新为: `https://你的域名/api/webhooks/creem`
-
-
-### 步骤 9: 更新Supabase回调地址
-1. 进入Supabase，Authentication > URL Configuration
-2. 更新Site URL为：`https://你的域名/`
-
-
-
-### 后续步骤：
-
-1. 测试用户登录功能
-2. 测试订阅支付、积分购买功能（测试信用卡号: 4242 4242 4242 4242）
-3. 切换Creem.io到正式付款，更新环境变量
-   ```
-   CREEM_TEST_MODE=false
-   CREEM_API_URL=https://api.creem.io
-   ```
-
-   
-
-
-## 项目结构
-
-```
-├── app/                   # Next.js 应用目录 (App Router)
-│   ├── (auth-pages)/     # 身份验证相关页面 (登录/注册)
-│   ├── api/             # API 路由 (支付回调/积分接口等)
-│   ├── dashboard/        # 用户仪表板页面
-│   ├── auth/            # Auth 回调处理
-│   ├── globals.css      # 全局样式文件
-│   ├── layout.tsx       # 根布局文件
-│   └── page.tsx         # 落地页 (Landing Page)
-├── components/           # React 组件
-│   ├── dashboard/      # 仪表板业务组件
-│   ├── ui/             # Shadcn/ui 通用组件库
-│   ├── header.tsx      # 顶部导航栏
-│   └── ...             # 其他共享组件
-├── config/              # 配置文件 (订阅计划/积分套餐)
-├── hooks/               # 自定义 React Hooks (use-user, use-toast)
-├── lib/                # 第三方库配置 (utils)
-├── public/             # 静态资源 (图片/图标)
-├── supabase/           # Supabase 迁移脚本和类型
-├── types/              # TypeScript 类型定义
-└── utils/              # 工具函数和中间件辅助
-```
+- 🦞 产品：磐元龙虾（OpenClacky 官方认证）
+- 📱 微信：**15676112976**
+- 📧 备注"磐元法讯"入群，获取每周法律科技动态
