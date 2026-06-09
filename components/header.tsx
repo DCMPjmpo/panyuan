@@ -21,14 +21,17 @@ export default function Header({ user }: HeaderProps) {
   const pathname = usePathname();
   const isDashboard = pathname?.startsWith("/dashboard");
 
-  // Main navigation items for generic SaaS
+  // Main navigation items for 磐元龙虾
   const mainNavItems: NavItem[] = [
-    { label: "Home", href: "/" },
-    { label: "Features", href: "/#features" },
-    { label: "Pricing", href: "/#pricing" },
+    { label: "首页", href: "/" },
+    { label: "安装指南", href: "/#install" },
+    { label: "法律技能", href: "/#skills" },
+    { label: "价格", href: "/#pricing" },
+    { label: "法讯", href: "/#contact" },
+    { label: "常见问题", href: "/#faq" },
   ];
 
-  // Dashboard items - empty array as we don't want navigation items in dashboard
+  // Dashboard items
   const dashboardItems: NavItem[] = [];
 
   // Choose which navigation items to show

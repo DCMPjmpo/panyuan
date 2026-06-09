@@ -1,23 +1,3 @@
-export interface ProductTier {
-  name: string;
-  id: string;
-  productId: string;
-  priceMonthly: string;
-  description: string;
-  featured: boolean;
-  features?: string[];
-  creditAmount?: number;
-  discountCode?: string;
-}
-
-export type SubscriptionStatus = {
-  isSubscribed: boolean;
-  status: string | null;
-  willEndOn: Date | null;
-  isInGracePeriod: boolean;
-  daysLeft: number | null;
-};
-
 export type SubscriptionState =
   | "active"
   | "trialing"
@@ -28,11 +8,34 @@ export type SubscriptionState =
   | "incomplete"
   | "expired";
 
-// Constants for subscription status checks
-export const ACTIVE_STATUSES = ["active", "trialing"] as const;
-export const GRACE_PERIOD_STATUSES = [
+export const ACTIVE_STATUSES: readonly string[] = [
+  "active",
+  "trialing",
+] as const;
+
+export const GRACE_PERIOD_STATUSES: readonly string[] = [
   "canceled",
   "past_due",
   "unpaid",
   "paused",
 ] as const;
+
+export interface ProductTier {
+  name: string;
+  id: string;
+  productId: string;
+  priceMonthly: string;
+  description: string;
+  features?: string[];
+  featured?: boolean;
+  discountCode?: string;
+  creditAmount?: number;
+}
+
+export interface SubscriptionStatus {
+  isSubscribed: boolean;
+  status: SubscriptionState | null;
+  willEndOn: Date | null;
+  isInGracePeriod: boolean;
+  daysLeft: number | null;
+}

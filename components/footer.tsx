@@ -5,23 +5,26 @@ import Link from "next/link";
 
 const footerLinks = [
   {
-    title: "Product",
+    title: "产品",
     links: [
-      { label: "Features", href: "/#features" },
-      { label: "Pricing", href: "/#pricing" },
+      { label: "首页", href: "/" },
+      { label: "安装指南", href: "/#install" },
+      { label: "法律技能", href: "/#skills" },
+      { label: "价格", href: "/#pricing" },
     ],
   },
   {
-    title: "Company",
+    title: "联系",
     links: [
-      { label: "About", href: "/about" },
+      { label: "磐元法讯", href: "/#contact" },
+      { label: "常见问题", href: "/#faq" },
     ],
   },
   {
-    title: "Legal",
+    title: "法律",
     links: [
-      { label: "Privacy", href: "/privacy" },
-      { label: "Terms", href: "/terms" },
+      { label: "隐私政策", href: "/privacy" },
+      { label: "服务条款", href: "/terms" },
     ],
   },
 ];
@@ -34,8 +37,7 @@ export function Footer() {
           <div className="col-span-full lg:col-span-2">
             <Logo />
             <p className="mt-4 text-sm text-muted-foreground">
-              Starter kit for your next project. Built with Next.js and
-              Creem.io.
+              磐元龙虾 — 基于 OpenClacky 平台的专业 AI 法律助手。搭载 47 项法律技能，一键安装即用。
             </p>
           </div>
           <div className="col-span-2 grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-4">

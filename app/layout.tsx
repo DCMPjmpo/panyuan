@@ -11,19 +11,21 @@ const baseUrl = process.env.BASE_URL
 
 export const metadata = {
   metadataBase: new URL(baseUrl),
-  title: "Simple Saas Starter Kit",
-  description: "The ultimate Next.js starter kit with Supabase Auth, Creem Payments, and a production-ready dashboard.",
-  keywords: "Next.js starter kit, SaaS boilerplate, Supabase, Creem payments, TypeScript",
+  title: "磐元龙虾 PanyuanClaw - 您的 AI 法律助手",
+  description:
+    "磐元龙虾搭载47项专业法律技能，覆盖合同审查、法律文书、企业法务、诉讼辅助、法律法规、个人法律服务。基于 OpenClacky 平台，一键安装，配好 API Key 即用。",
+  keywords:
+    "磐元龙虾, AI法律助手, 法律AI, 合同审查, 法律文书, OpenClacky, PanyuanClaw",
   openGraph: {
-    title: "Simple Saas Starter Kit",
-    description: "The ultimate Next.js starter kit with Supabase Auth, Creem Payments, and a production-ready dashboard.",
+    title: "磐元龙虾 PanyuanClaw - 您的 AI 法律助手",
+    description: "搭载47项专业法律技能，一键安装，配好 API Key 即用。",
     type: "website",
     url: baseUrl,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Simple Saas Starter Kit",
-    description: "The ultimate Next.js starter kit with Supabase Auth, Creem Payments, and a production-ready dashboard.",
+    title: "磐元龙虾 PanyuanClaw - AI 法律助手",
+    description: "搭载47项专业法律技能，一键安装，配好 API Key 即用。",
   },
 };
 
