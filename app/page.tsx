@@ -128,8 +128,10 @@ export default function Home() {
               <CardContent className="p-0">
                 <div className="flex items-center gap-3 px-4 py-3 bg-primary/5 border-b">
                   <div className="w-7 h-7 bg-primary rounded-full flex items-center justify-center text-primary-foreground text-sm font-bold flex-shrink-0">2</div>
-                  <span className="font-semibold">第 2 步：运行安装命令</span>
-                  <span className="text-xs text-muted-foreground">（安装磐元龙虾品牌 + 47 项法律技能）</span>
+                  <span className="font-semibold">第 2 步：在终端中运行命令</span>
+                  <span className="text-xs text-muted-foreground">
+                    {activeTab === "windows" ? "（右键开始 → PowerShell管理员 → 粘贴运行）" : "（打开终端 → 粘贴运行）"}
+                  </span>
                 </div>
                 <div className="bg-zinc-950 text-zinc-50">
                   <div className="flex items-center justify-between px-4 py-2 bg-zinc-900 border-b border-zinc-800">
