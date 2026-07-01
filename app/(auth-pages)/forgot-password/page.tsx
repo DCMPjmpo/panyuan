@@ -1,14 +1,11 @@
-import { forgotPasswordAction } from "@/app/actions";
-import { FormMessage, Message } from "@/components/form-message";
-import { SubmitButton } from "@/components/submit-button";
+"use client";
+
+import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
-export default async function ForgotPassword(props: {
-  searchParams: Promise<Message>;
-}) {
-  const searchParams = await props.searchParams;
+export default function ForgotPassword() {
   return (
     <>
       <div className="flex flex-col space-y-2 text-center">
@@ -16,12 +13,11 @@ export default async function ForgotPassword(props: {
           Reset password
         </h1>
         <p className="text-sm text-muted-foreground">
-          Enter your email address and we'll send you a link to reset your
-          password
+          Password reset is coming soon. Stay tuned!
         </p>
       </div>
       <div className="grid gap-6">
-        <form className="grid gap-4">
+        <form className="grid gap-4" onSubmit={(e) => e.preventDefault()}>
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
             <Input
@@ -32,17 +28,12 @@ export default async function ForgotPassword(props: {
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
-              required
+              disabled
             />
           </div>
-          <SubmitButton
-            className="w-full"
-            formAction={forgotPasswordAction}
-            pendingText="Sending reset link..."
-          >
+          <Button className="w-full" disabled>
             Send reset link
-          </SubmitButton>
-          <FormMessage message={searchParams} />
+          </Button>
         </form>
         <div className="text-sm text-muted-foreground text-center">
           Remember your password?{" "}

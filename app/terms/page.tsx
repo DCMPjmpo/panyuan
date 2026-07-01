@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft, FileText, Scale, AlertTriangle, CheckCircle, XCircle, Users } from "lucide-react";
+import { ArrowLeft, FileText, Scale, AlertTriangle, CheckCircle, XCircle } from "lucide-react";
 
 export default function TermsPage() {
   return (
@@ -16,13 +16,13 @@ export default function TermsPage() {
             <Button asChild variant="ghost" size="sm" className="gap-2">
               <Link href="/">
                 <ArrowLeft className="h-4 w-4" />
-                Back to Home
+                返回首页
               </Link>
             </Button>
             <div>
-              <h1 className="text-xl font-bold">Terms of Service</h1>
+              <h1 className="text-xl font-bold">服务条款</h1>
               <p className="text-sm text-muted-foreground">
-                Terms and conditions for using our service
+                使用磐元龙虾服务须遵守的条款
               </p>
             </div>
           </div>
@@ -41,17 +41,16 @@ export default function TermsPage() {
           >
             <div className="inline-flex items-center rounded-full px-3 py-1 text-sm bg-primary/10 text-primary mb-4">
               <Scale className="mr-2 h-4 w-4" />
-              Legal Terms
+              法律条款
             </div>
             <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-              Terms of Service
+              服务条款
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              These terms govern your use of our Chinese name generation service. 
-              By using our service, you agree to these terms and conditions.
+              这些条款适用于您使用磐元龙虾 AI 法律助手服务。使用即表示您同意这些条款。
             </p>
             <p className="text-sm text-muted-foreground">
-              <strong>Last updated:</strong> January 31, 2025
+              <strong>最后更新：</strong>2025 年 1 月
             </p>
           </motion.div>
 
@@ -67,11 +66,11 @@ export default function TermsPage() {
                 <div className="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center mb-4">
                   <CheckCircle className="h-6 w-6 text-green-600" />
                 </div>
-                <CardTitle className="text-lg">What You Can Do</CardTitle>
+                <CardTitle className="text-lg">您可以</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground text-sm">
-                  Use our service to generate Chinese names, save your favorites, and share your generated names with others.
+                  使用磐元龙虾进行法律文书起草、合同审查、法律咨询辅助等合法用途。
                 </p>
               </CardContent>
             </Card>
@@ -81,11 +80,11 @@ export default function TermsPage() {
                 <div className="w-12 h-12 rounded-lg bg-red-100 flex items-center justify-center mb-4">
                   <XCircle className="h-6 w-6 text-red-600" />
                 </div>
-                <CardTitle className="text-lg">What You Cannot Do</CardTitle>
+                <CardTitle className="text-lg">您不可以</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground text-sm">
-                  Misuse our service, violate others' rights, or use generated names for illegal or harmful purposes.
+                  滥用服务、侵犯他人权利、或将 AI 生成内容用于非法或有害目的。
                 </p>
               </CardContent>
             </Card>
@@ -93,13 +92,13 @@ export default function TermsPage() {
             <Card className="border-2">
               <CardHeader>
                 <div className="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center mb-4">
-                  <Users className="h-6 w-6 text-blue-600" />
+                  <Scale className="h-6 w-6 text-blue-600" />
                 </div>
-                <CardTitle className="text-lg">Our Commitment</CardTitle>
+                <CardTitle className="text-lg">我们的承诺</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground text-sm">
-                  Provide reliable service, protect your privacy, and maintain the quality of our name generation.
+                  提供可靠的服务、保护您的隐私、持续优化法律 AI 技能的质量。
                 </p>
               </CardContent>
             </Card>
@@ -115,26 +114,24 @@ export default function TermsPage() {
             <div className="bg-muted/30 rounded-2xl p-8">
               <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
                 <FileText className="h-6 w-6 text-primary" />
-                Our Service
+                服务说明
               </h3>
-              
+
               <div className="space-y-4 text-muted-foreground">
                 <p>
-                  Chinese Name Generator is an AI-powered platform that creates personalized Chinese names based on 
-                  your preferences, personality traits, and cultural considerations. Our service includes:
+                  磐元龙虾是基于 OpenClacky 开源框架构建的 AI 法律助手，提供 47 项专业法律技能，
+                  包括但不限于合同审查、法律文书生成、企业法务咨询、诉讼辅助、法律法规解读等服务。
                 </p>
-                
                 <ul className="space-y-2">
-                  <li>• <strong>Free Generation:</strong> Limited daily name generation for non-registered users</li>
-                  <li>• <strong>Premium Features:</strong> Unlimited generation, personalized matching, and name saving for registered users</li>
-                  <li>• <strong>Cultural Education:</strong> Detailed meanings, pronunciations, and cultural context for generated names</li>
-                  <li>• <strong>Personal Collections:</strong> Save and manage your favorite generated names</li>
+                  <li>• <strong>免费安装：</strong>磐元龙虾技能包可免费安装使用</li>
+                  <li>• <strong>BYOK 模式：</strong>用户自带 API Key，数据在本地处理</li>
+                  <li>• <strong>社群版订阅：</strong>可选年费订阅获取社群服务和持续更新</li>
                 </ul>
               </div>
             </div>
           </motion.div>
 
-          {/* User Responsibilities */}
+          {/* Disclaimer */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -142,194 +139,55 @@ export default function TermsPage() {
             className="space-y-8"
           >
             <div className="bg-muted/30 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold mb-6">Your Responsibilities</h3>
-              
-              <div className="grid gap-6 md:grid-cols-2">
+              <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                <AlertTriangle className="h-6 w-6 text-amber-500" />
+                免责声明
+              </h3>
+
+              <div className="space-y-4 text-muted-foreground">
                 <div>
-                  <h4 className="font-semibold mb-3 text-green-700">Acceptable Use</h4>
-                  <ul className="space-y-2 text-muted-foreground">
-                    <li>• Use the service for personal, educational, or cultural purposes</li>
-                    <li>• Provide accurate information when creating an account</li>
-                    <li>• Respect intellectual property rights</li>
-                    <li>• Keep your account credentials secure</li>
-                    <li>• Report any technical issues or misuse</li>
-                  </ul>
+                  <h4 className="font-semibold mb-2 text-foreground">AI 生成内容仅供参考</h4>
+                  <p>
+                    磐元龙虾提供的所有法律内容均由 AI 生成，仅供学习与参考用途，不构成正式法律意见。
+                    AI 分析不能替代持证律师的专业判断。重大法律事务请务必咨询执业律师。
+                  </p>
                 </div>
-                
+
                 <div>
-                  <h4 className="font-semibold mb-3 text-red-700">Prohibited Activities</h4>
-                  <ul className="space-y-2 text-muted-foreground">
-                    <li>• Using generated names for fraudulent purposes</li>
-                    <li>• Attempting to reverse-engineer our algorithms</li>
-                    <li>• Sharing account credentials with others</li>
-                    <li>• Using automated tools to bulk-generate names</li>
-                    <li>• Violating any applicable laws or regulations</li>
-                  </ul>
+                  <h4 className="font-semibold mb-2 text-foreground">服务可用性</h4>
+                  <p>
+                    虽然我们努力维持服务的持续可用，但不能保证不间断访问。
+                    我们可能会因维护、更新或不可控情况而临时暂停服务。
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold mb-2 text-foreground">无担保声明</h4>
+                  <p>
+                    本服务按"现状"提供，不附带任何明示或暗示的担保。
+                    我们不保证生成内容在所有法律场景中的适用性或准确性。
+                  </p>
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Intellectual Property */}
+          {/* Contact */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.8 }}
-            className="space-y-8"
-          >
-            <div className="bg-muted/30 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold mb-6">Intellectual Property and Generated Names</h3>
-              
-              <div className="space-y-4 text-muted-foreground">
-                <div>
-                  <h4 className="font-semibold mb-3 text-foreground">Your Rights to Generated Names</h4>
-                  <p>
-                    You have the right to use any Chinese names generated through our service for personal purposes. 
-                    However, please note that traditional Chinese names are part of cultural heritage and cannot be 
-                    exclusively owned by any individual.
-                  </p>
-                </div>
-                
-                <div>
-                  <h4 className="font-semibold mb-3 text-foreground">Our Intellectual Property</h4>
-                  <p>
-                    The Chinese Name Generator platform, including our AI algorithms, website design, brand elements, 
-                    and proprietary technology, remains our intellectual property. You may not copy, modify, or 
-                    redistribute our platform or technology.
-                  </p>
-                </div>
-                
-                <div>
-                  <h4 className="font-semibold mb-3 text-foreground">Cultural Respect</h4>
-                  <p>
-                    We encourage respectful use of Chinese names and understanding of their cultural significance. 
-                    Generated names should be used with appreciation for Chinese culture and traditions.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Service Availability */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1.0 }}
-            className="space-y-8"
-          >
-            <div className="bg-muted/30 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                <AlertTriangle className="h-6 w-6 text-amber-500" />
-                Service Availability and Disclaimers
-              </h3>
-              
-              <div className="space-y-4 text-muted-foreground">
-                <div>
-                  <h4 className="font-semibold mb-2 text-foreground">Service Availability</h4>
-                  <p>
-                    While we strive to maintain 24/7 service availability, we cannot guarantee uninterrupted access. 
-                    We may temporarily suspend service for maintenance, updates, or due to circumstances beyond our control.
-                  </p>
-                </div>
-                
-                <div>
-                  <h4 className="font-semibold mb-2 text-foreground">AI-Generated Content</h4>
-                  <p>
-                    Our Chinese names are generated by AI technology. While we strive for cultural accuracy and appropriateness, 
-                    we recommend consulting with native speakers or cultural experts for important use cases.
-                  </p>
-                </div>
-                
-                <div>
-                  <h4 className="font-semibold mb-2 text-foreground">No Warranties</h4>
-                  <p>
-                    Our service is provided "as is" without warranties of any kind. We do not guarantee the suitability 
-                    of generated names for any specific purpose or their acceptance in all cultural contexts.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Payment Terms */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1.2 }}
-            className="space-y-8"
-          >
-            <div className="bg-muted/30 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold mb-6">Payment and Subscription Terms</h3>
-              
-              <div className="grid gap-6 md:grid-cols-2">
-                <div>
-                  <h4 className="font-semibold mb-3">Premium Subscriptions</h4>
-                  <ul className="space-y-2 text-muted-foreground">
-                    <li>• Monthly and annual subscription options available</li>
-                    <li>• Automatic renewal unless cancelled</li>
-                    <li>• Access to unlimited name generation</li>
-                    <li>• Premium features and personalization</li>
-                  </ul>
-                </div>
-                
-                <div>
-                  <h4 className="font-semibold mb-3">Cancellation and Refunds</h4>
-                  <ul className="space-y-2 text-muted-foreground">
-                    <li>• Cancel anytime through your account settings</li>
-                    <li>• Refunds processed according to our refund policy</li>
-                    <li>• No refunds for partially used subscription periods</li>
-                    <li>• Free trial cancellations take effect immediately</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Changes to Terms */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1.4 }}
-            className="space-y-8"
-          >
-            <div className="bg-muted/30 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold mb-6">Changes to These Terms</h3>
-              
-              <div className="space-y-4 text-muted-foreground">
-                <p>
-                  We may update these Terms of Service from time to time to reflect changes in our service, 
-                  legal requirements, or business practices. When we make changes:
-                </p>
-                
-                <ul className="space-y-2">
-                  <li>• We will update the "Last updated" date at the top of this page</li>
-                  <li>• For significant changes, we will notify users via email or service notifications</li>
-                  <li>• Continued use of our service after changes constitutes acceptance of new terms</li>
-                  <li>• You can always find the current version of our terms on this page</li>
-                </ul>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Contact Information */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1.6 }}
             className="text-center bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 rounded-2xl p-8"
           >
-            <h3 className="text-2xl font-bold mb-4">Questions About These Terms?</h3>
+            <h3 className="text-2xl font-bold mb-4">有问题？</h3>
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              If you have any questions about these Terms of Service or need clarification about your rights and responsibilities, 
-              please contact us. We're here to help ensure you understand and can comply with these terms.
+              如果您对这些条款有任何疑问，请随时联系我们。
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild>
-                <Link href="/">
-                  Start Using Service
-                </Link>
-              </Button>
-            </div>
+            <Button asChild>
+              <Link href="/">
+                返回首页
+              </Link>
+            </Button>
           </motion.div>
         </div>
       </div>

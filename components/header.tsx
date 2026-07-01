@@ -1,6 +1,5 @@
 "use client";
 
-import { signOutAction } from "@/app/actions";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { ThemeSwitcher } from "./theme-switcher";
@@ -8,18 +7,13 @@ import { Logo } from "./logo";
 import { usePathname } from "next/navigation";
 import { MobileNav } from "./mobile-nav";
 
-interface HeaderProps {
-  user: any;
-}
-
 interface NavItem {
   label: string;
   href: string;
 }
 
-export default function Header({ user }: HeaderProps) {
+export default function Header() {
   const pathname = usePathname();
-  const isDashboard = pathname?.startsWith("/dashboard");
 
   // Main navigation items for 磐元龙虾
   const mainNavItems: NavItem[] = [
@@ -31,11 +25,7 @@ export default function Header({ user }: HeaderProps) {
     { label: "常见问题", href: "/#faq" },
   ];
 
-  // Dashboard items
-  const dashboardItems: NavItem[] = [];
-
-  // Choose which navigation items to show
-  const navItems = isDashboard ? dashboardItems : mainNavItems;
+  const navItems = mainNavItems;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -43,7 +33,7 @@ export default function Header({ user }: HeaderProps) {
         <div className="flex items-center">
           <Logo />
         </div>
-        
+
         {/* Centered Navigation */}
         <nav className="hidden md:flex items-center gap-8 absolute left-1/2 transform -translate-x-1/2">
           {navItems.map((item) => (
@@ -59,35 +49,7 @@ export default function Header({ user }: HeaderProps) {
 
         <div className="flex items-center gap-2">
           <ThemeSwitcher />
-          {user ? (
-            <div className="hidden md:flex items-center gap-2">
-              {isDashboard && (
-                <span className="hidden sm:inline text-sm text-muted-foreground">
-                  {user.email}
-                </span>
-              )}
-              {!isDashboard && (
-                <Button asChild size="sm" variant="outline">
-                  <Link href="/dashboard">Dashboard</Link>
-                </Button>
-              )}
-              <form action={signOutAction}>
-                <Button type="submit" variant="outline" size="sm">
-                  Sign out
-                </Button>
-              </form>
-            </div>
-          ) : (
-            <div className="hidden md:flex gap-2">
-              <Button asChild size="sm" variant="outline">
-                <Link href="/sign-in">Sign in</Link>
-              </Button>
-              <Button asChild size="sm">
-                <Link href="/sign-up">Sign up</Link>
-              </Button>
-            </div>
-          )}
-          <MobileNav items={navItems} user={user} isDashboard={isDashboard} />
+          <MobileNav items={navItems} />
         </div>
       </div>
     </header>
